@@ -5,6 +5,9 @@ let cors = require("cors");
 const port = 5500;
 
 app.use(cors());
+app.use(express.json());
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.post('/score', (req, res) => {
     console.log("post score");
@@ -13,11 +16,14 @@ app.post('/score', (req, res) => {
             console.error(err)
             return;
         }
-        console.log(data)
-        console.log(req.data);
-        // if(topScore < req.body){
-        res.send('fine');
-        // }
+        if(Number(data) < Number(req.body.score)){
+            fs.writeFile('score.txt', req.body.score, err => {
+                if (err) {
+                    console.error(err)
+                    return
+                }
+            })
+        }
     })
 });
 

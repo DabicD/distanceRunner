@@ -99,10 +99,11 @@ class RunnerCanvasGame extends CanvasGame
 
     }
     stopAll(){
-        gameObjects[score].postPoints();
         gameObjects.forEach((item) => {
             item.stop();
         });
+        gameObjects[score].postPoints();
+
     }
 
     addObject(type = 3, fly = true){

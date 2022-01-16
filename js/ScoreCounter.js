@@ -36,6 +36,7 @@ class ScoreCounter extends GameObject
     httpPost(theUrl){
         var xmlHttp = new XMLHttpRequest();
         xmlHttp.open( "POST", theUrl, true );
-        xmlHttp.send( this.points );
+        xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xmlHttp.send( `score=${this.points}` );
     }
 }
