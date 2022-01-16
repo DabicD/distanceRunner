@@ -7,9 +7,15 @@ class TopScore extends GameObject
     {
         super(200, 2);
 
-        /* These variables depend on the object */
         this.points = '---';
-        //REQUEST
+        this.isCalled = false;
+    }
+    updateState()
+    {   
+        if(!this.isCalled){
+            this.getPoints();
+            this.isCalled = true;
+        }
     }
     render()
     {
@@ -18,9 +24,17 @@ class TopScore extends GameObject
         ctx.fillText(`Highest score: ${this.points}`, 220, 60);
     }
     getPoints(){
-        return this.points;
+        this.httpGet('http://localhost:5500/score');
     }
-    extraPoints( value ){
-        this.points += value;
+    httpGet(theUrl){
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                gameObjects[topScore].points = this.responseText;
+            }
+        };
+        xmlHttp.open( "GET", theUrl, true ); // false for synchronous request
+        xmlHttp.send( null );
+        return xmlHttp.responseText;
     }
 }

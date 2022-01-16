@@ -99,6 +99,7 @@ class RunnerCanvasGame extends CanvasGame
 
     }
     stopAll(){
+        gameObjects[score].postPoints();
         gameObjects.forEach((item) => {
             item.stop();
         });
@@ -158,11 +159,11 @@ class RunnerCanvasGame extends CanvasGame
                 obstacleInterval: 15
             },{
                 breakpoint: 50,
-                speed: 0.5,
+                speed: 0.6,
                 obstacleInterval: 12
             },{
                 breakpoint: 100,
-                speed: 0.4,
+                speed: 0.5,
                 obstacleInterval: 10
             },{
                 breakpoint: 150,

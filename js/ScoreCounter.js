@@ -30,4 +30,12 @@ class ScoreCounter extends GameObject
     stopCounting(){
         this.counting = false;
     }
+    postPoints(){
+        this.httpPost('http://localhost:5500/score');
+    }
+    httpPost(theUrl){
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.open( "POST", theUrl, true );
+        xmlHttp.send( this.points );
+    }
 }
