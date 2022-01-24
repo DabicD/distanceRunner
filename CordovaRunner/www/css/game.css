@@ -1,0 +1,88 @@
+/* Author: Derek O Reilly, Dundalk Institute of Technology, Ireland. */
+/* style class for game's container, canvas and loading message      */
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+}
+
+body {
+    background-image:linear-gradient(to bottom, #585858 0%, #1B1B1B 51%);
+    height: 100vh;
+    padding: 16px;
+}
+
+
+#deviceready {
+    margin: auto;
+    width: fit-content;
+    color: white;
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-size: 1.2rem;
+
+    text-align: center;
+    padding: 0 20px;
+}
+
+#gameContainer
+{
+    /* style the gameContainer if the game includes non-canvas elements */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 500px;
+    margin: 0 auto;
+    max-width: 100%;
+}
+
+#gameCanvas
+{
+    /* the canvas styling usually does not change */
+    outline:1px solid darkgrey;
+    width:100%;
+    height:600px;
+}
+
+#loadingMessage
+{
+    /* the loading message styling usually does not change */
+    position:absolute;
+    top:100px;
+    left:100px;
+    z-index:100;
+    font-size:50px;
+}
+
+.controllers{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+@media screen and (max-width:400px) {
+    .app {
+
+    }
+}
+
+.btn{
+    transform: scale(1.5);
+    margin-top: -15px;
+    color: black;
+    background-color: white;
+    line-height: 1rem;
+    border: 2px solid black;
+    border-radius: 50%;
+
+    font-size: 2rem;
+    display: flex;
+    width: 60px;
+    height: 60px;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn:nth-child(3){
+    font-size: .9em;
+}

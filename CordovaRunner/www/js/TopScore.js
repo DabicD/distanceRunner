@@ -21,7 +21,7 @@ class TopScore extends GameObject
     {
         ctx.font = "20px Arial";
         ctx.fillStyle = 'black';
-        ctx.fillText(`Highest score: ${this.points}`, 220, 60);
+        ctx.fillText(`Highest score: ${this.points}`, 10, 70);
     }
     getPoints(){
         this.httpGet('http://localhost:5500/score');

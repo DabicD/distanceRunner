@@ -1,11 +1,11 @@
 /******************** Declare game specific global data and functions *****************/
 /* images must be declared as global, so that they will load before the game starts  */
 let skyImage = new Image();
-skyImage.src = "https://derek.dkit.ie/games_development/canvas/exampleCode/images/scrolling_background_sky.png";
+skyImage.src = "images/scrolling_background_sky.png";
 let middleImage = new Image();
-middleImage.src = "https://derek.dkit.ie/games_development/canvas/exampleCode/images/scrolling_background_middle.png";
+middleImage.src = "images/scrolling_background_middle.png";
 let foregroundImage = new Image();
-foregroundImage.src = "https://derek.dkit.ie/games_development/canvas/exampleCode/images/scrolling_background_foreground.png";
+foregroundImage.src = "images/scrolling_background_foreground.png";
 let floorImage = new Image();
 floorImage.src = "images/floor.png";
 let runnerImage = new Image();
@@ -68,9 +68,6 @@ function playGame()
     gameObjects[lifes] = new LifeCounter(heartImage);
     gameObjects[topScore] = new TopScore();
 
-    // make the canvas wider for this example
-    document.getElementById("gameCanvas").style.width = "1000px";
-
     /* END OF game specific code. */
 
     /* Always create a game that uses the gameObject array */
@@ -81,11 +78,35 @@ function playGame()
 
 
     /* If they are needed, then include any game-specific mouse and keyboard listners */
-    document.addEventListener("keydown", function (e)
-    {
+    document.addEventListener("keydown", function (e){
         if (e.keyCode === 32) // space bar
         {
             gameObjects[runner].jump();
         }
     });
-}
+    document.getElementById("up_btn").addEventListener('click', function (e){
+        gameObjects[runner].jump();
+	});
+    document.getElementById("gameCanvas").addEventListener("click", function (e){
+        gameObjects[runner].jump();
+	});
+    document.getElementById("restart_btn").addEventListener("click", function (e){
+        window.location.reload(true);
+	});
+    window.addEventListener("deviceorientation", handleOrientation, true);
+
+    let back = false;
+    function handleOrientation(event){
+        // console.log("Alpha: "+event.alpha);
+        // console.log("Beta: "+event.beta);
+        // console.log("Gamma:"+event.gamma);
+        // console.log("Absolute:"+event.absolute);
+        if(event.gamma < 85 && event.gamma > 45){
+            gameObjects[runner].jump();
+            back = true;
+        } else{
+            back = false
+        }
+    };
+
+};

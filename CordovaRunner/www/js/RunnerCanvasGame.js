@@ -84,6 +84,8 @@ class RunnerCanvasGame extends CanvasGame
                                 console.log('DEAD');
                                 console.log('Game is over!');
                                 this.stopAll();
+                                console.log("wrrr");
+                                navigator.vibrate(1000);
                             }
                             break;
                         case 'extraLife':

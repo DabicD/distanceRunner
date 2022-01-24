@@ -22,21 +22,11 @@ let gameObjects = [];
 
 /* Wait for all game assets, such as audio and images to load before starting the game */
 /* The code below will work for both websites and Cordova mobile apps                  */
-window.addEventListener("load", onAllAssetsLoaded);           // needed for websites
+//window.addEventListener("load", onAllAssetsLoaded);           // needed for websites
 document.addEventListener("deviceready", onAllAssetsLoaded);  // needed for Cordova mobile apps
-
-let game_is_loaded = false;
 document.write("<div id='loadingMessage'>Loading...</div>");
 function onAllAssetsLoaded()
 {
-    // Both "load" and "deviceready" will call this function.
-    // The game_is_loaded flag is used to make sure that this function will only be executed once 
-    if(game_is_loaded)
-    {
-        return;
-    }
-    game_is_loaded = true;
-
     /* hide the webpage loading message */
     document.getElementById('loadingMessage').style.visibility = "hidden";
 
@@ -44,9 +34,8 @@ function onAllAssetsLoaded()
     /* This code never changes                        */
     canvas = document.getElementById("gameCanvas");
     ctx = canvas.getContext("2d");
-    canvas.width = canvas.clientWidth;
-    canvas.height = canvas.clientHeight;
-
+	canvas.width = Math.min(window.innerWidth,canvas.clientWidth,window.screen.width);
+    canvas.height = Math.min(window.innerHeight,canvas.clientHeight, window.screen.height);
     playGame(); // Each game will include its own .js file, which will hold the game's palyGame() function
 }
 
@@ -58,4 +47,3 @@ Math.radians = function (degrees)
 {
     return degrees * Math.PI / 180;
 };
-
